@@ -86,4 +86,17 @@ Environment variables are loaded from two files:
 * **CI/CD pipeline**: We should add a CI/CD pipelin (lint , test, build/push) .
 * **E2Es**: Add e2es to front & back
 
----
+ _
+//\
+V  \
+ \  \_
+  \,'.`-.
+   |\ `. `.       
+   ( \  `. `-.                        _,.-:\
+    \ \   `.  `-._             __..--' ,-';/
+     \ `.   `-.   `-..___..---'   _.--' ,'/
+      `. `.    `-._        __..--'    ,' /
+        `. `-_     ``--..''       _.-' ,'
+          `-_ `-.___        __,--'   ,'
+             `-.__  `----"""    __.-'
+gift              `--..____..--'
