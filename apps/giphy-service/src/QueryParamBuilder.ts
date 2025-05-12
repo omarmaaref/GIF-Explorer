@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { RatingEnum, RatingEnumMap } from './giphy/dto/rating';
+import { RatingEnum } from './giphy/dto/rating';
 
 export class QueryParamBuilder {
   private params: Record<string, any> = {};
@@ -11,7 +11,7 @@ export class QueryParamBuilder {
 
   rating(r: RatingEnum | undefined): this {
     if (r !== RatingEnum.ALL && r) {
-      this.params.rating = RatingEnumMap[RatingEnum[r]];
+      this.params.rating = r.toString();
     }
     console.log('this.params.rating',this.params.rating)
     return this;

@@ -22,8 +22,7 @@ import { CacheModule } from '@nestjs/cache-manager';
       inject: [ConfigService],
     }),
     CacheModule.register({
-      ttl: 30,
-      max: 100,
+      ttl: 60000
     }),
   ],
   controllers: [GiphyController],

@@ -4,6 +4,7 @@ import {
   BadRequestException,
   BadGatewayException,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
@@ -88,6 +89,7 @@ export class GiphyService {
             .build(),
         ),
       );
+
       return resp.data.data.map((i: any) => this.transform(i));
     } catch (err) {
       this.handleHttpError(err, 'searchGifs');
@@ -106,21 +108,27 @@ export class GiphyService {
     const stack = error instanceof Error ? error.stack : '';
     this.logger.error(`Error in ${method}: ${message}`, stack);
 
-    // If it's an AxiosError, we can extract status & data
+    // If it's an AxiosError, extract status & data
     if ((error as AxiosError).isAxiosError) {
       const axiosErr = error as AxiosError;
       const status = axiosErr.response?.status;
       const dataMsg = axiosErr.response?.data;
+
+      if (status === 401) {
+        throw new UnauthorizedException(
+          dataMsg || 'Unauthorized access to Giphy API',
+        );
+      }
 
       if (status && status >= 400 && status < 500) {
         throw new BadRequestException(
           dataMsg || 'Invalid request to Giphy API',
         );
       }
+
       throw new BadGatewayException('Giphy API is unavailable');
     }
 
-    // Fallback
     throw new InternalServerErrorException('Unexpected error fetching GIFs');
   }
 }

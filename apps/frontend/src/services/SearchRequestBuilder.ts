@@ -23,7 +23,7 @@ export class SearchRequestBuilder extends RequestBuilder {
 
   rating(rating: RatingEnum) {
     if (rating != RatingEnum.ALL) {
-      this.url.searchParams.set('rating', RatingEnum[rating].toString());
+      this.url.searchParams.set('rating', rating);
     }
     return this;
   }

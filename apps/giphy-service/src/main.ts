@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 async function bootstrap() {
+  //TODO: fix cors: we should allow requests only front our frontend 
   const app = await NestFactory.create(AppModule, {
     cors: true,
   });

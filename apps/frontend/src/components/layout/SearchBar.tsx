@@ -1,12 +1,18 @@
 // components/SearchBar.tsx
 import React from 'react';
-import { RatingEnum, ratingLabels } from '../types/rating';
-import { useGif } from '../context/GifContext';
+import { RatingEnum, ratingLabels } from '../../types/rating';
+import { useGif } from '../../context/GifContext';
 
 export const SearchBar: React.FC = () => {
-  const ratingValues = Object
-  .values(RatingEnum)
-  .filter(v => typeof v === 'number') as RatingEnum[];
+const ratingValues = Object.values(RatingEnum); // ['all', 'g', 'pg', 'pg-13']
+
+const ratingLabels: Record<RatingEnum, string> = {
+  [RatingEnum.ALL]: 'All',
+  [RatingEnum.G]: 'G',
+  [RatingEnum.PG]: 'PG',
+  [RatingEnum.PG13]: 'PG-13',
+};
+
 
     const {
       query,
@@ -39,7 +45,7 @@ export const SearchBar: React.FC = () => {
     />
     <select
       value={rating}
-      onChange={e => setRating(Number(e.target.value) as RatingEnum)}
+      onChange={e => setRating(e.target.value as RatingEnum)}
       className="
         w-[80px] px-3 py-2
         border border-gray-300
@@ -48,7 +54,7 @@ export const SearchBar: React.FC = () => {
     >
       {ratingValues.map(r => (
         <option key={r} value={r}>
-          {ratingLabels[r]}
+          {ratingLabels[r as RatingEnum]}
         </option>
       ))}
     </select>

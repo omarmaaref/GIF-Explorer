@@ -56,7 +56,7 @@
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Environment variables are loaded from two files:
 
@@ -73,9 +73,17 @@ Environment variables are loaded from two files:
 
 ---
 
-## 🛠 Areas for Improvement
+## Areas for Improvement
 
 * **Frontend Unit Tests**: We currently lack automated tests for React components. Adding Jest and React Testing Library tests will increase confidence during refactoring.
 * **Documentation**: Expand code comments and architectural diagrams to meet internal standards and simplify onboarding.
+
+* **Rate limiting & retries (API)**: If we intend to make this app scalable we should protect & stabilize our expensive Giphy API endpoint with Add rate limiting (`@nestjs/throttler`) and exponential-back-off retries with a circuit breaker.
+
+* **Cache store**: In memory cache is the simplest choice for our 1 instance backend, if we intend to make use of horizental scalability by using more instances , we should use a better caching service that instance independant (like redis)
+
+* **Security headers / CORS**: Should white list our frontend services only. 
+* **CI/CD pipeline**: We should add a CI/CD pipelin (lint , test, build/push) .
+* **E2Es**: Add e2es to front & back
 
 ---
